@@ -1,34 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBannerDto } from './dto/create-banner.dto';
 import { UpdateBannerDto } from './dto/update-banner.dto';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Banner } from 'src/entities/Banner.entity';
-import { EntityRepository } from '@mikro-orm/postgresql';
+import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
+import { wrap } from '@mikro-orm/core';
 
 @Injectable()
 export class BannerService {
   constructor(
     @InjectRepository(Banner)
     private readonly bannerRepository: EntityRepository<Banner>,
+    private readonly em: EntityManager,
   ) {}
 
-  create(createBannerDto: CreateBannerDto) {
-    return 'This action adds a new banner';
+  async create(createBannerDto: CreateBannerDto) {
+    const banner = await this.bannerRepository.create(createBannerDto);
+    await this.em.flush();
+    return banner;
   }
 
   async findAll(): Promise<Banner[]> {
     return this.bannerRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} banner`;
+  async findOne(id: number) {
+    const banner = await this.bannerRepository.findOne({
+      id,
+    });
+    if (!banner) {
+      throw new NotFoundException(`Banner #${id} not found`);
+    }
+
+    return banner;
   }
 
-  update(id: number, updateBannerDto: UpdateBannerDto) {
-    return `This action updates a #${id} banner`;
+  async update(id: number, updateBannerDto: UpdateBannerDto) {
+    const banner = await this.findOne(id);
+    wrap(banner).assign(updateBannerDto);
+    await this.em.flush();
+
+    return banner;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} banner`;
+  async remove(id: number) {
+    await this.findOne(id);
+    await this.bannerRepository.nativeDelete({
+      id,
+    });
+
+    return id;
   }
 }

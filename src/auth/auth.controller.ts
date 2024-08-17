@@ -34,7 +34,6 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
-  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   @UseInterceptors(ClassSerializerInterceptor)
   @Get('profile')
