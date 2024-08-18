@@ -17,7 +17,6 @@ import { Response } from 'express';
 import { AuthGuard } from 'src/guards/auth.guard';
 
 @ApiTags('Upload')
-@ApiBearerAuth()
 @Controller('upload')
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
@@ -25,6 +24,7 @@ export class UploadController {
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   @ApiConsumes('multipart/form-data')
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   upload(
     @UploadedFile() file: Express.Multer.File,
