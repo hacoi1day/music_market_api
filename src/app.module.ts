@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { BannerModule } from './banner/banner.module';
 import configuration from './config/configuration';
 import { SongModule } from './song/song.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { SongModule } from './song/song.module';
     BannerModule,
     SongModule,
     AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
