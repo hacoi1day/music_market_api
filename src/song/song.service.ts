@@ -23,6 +23,17 @@ export class SongService {
     return this.songRepository.findAll();
   }
 
+  async paginate(page = 1, limit = 10) {
+    const songs = await this.songRepository.find(
+      {},
+      {
+        limit,
+        offset: (page - 1) * limit,
+      },
+    );
+    return songs;
+  }
+
   async findOne(id: number) {
     const song = await this.songRepository.findOne({
       id,
