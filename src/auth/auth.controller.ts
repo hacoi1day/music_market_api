@@ -16,6 +16,7 @@ import { AuthGuard } from 'src/guards/auth.guard';
 import { Request } from 'express';
 import { ForgotPasswordDto } from './dto/ForgotPassword.dto';
 import { ResetPasswordDto } from './dto/ResetPassword.dto';
+import { ChangePasswordDto } from './dto/ChangePassword.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -51,5 +52,14 @@ export class AuthController {
   @Get('profile')
   profile(@Req() request: Request) {
     return this.authService.profile(request.user.id);
+  }
+
+  @Post('change-password')
+  @UseGuards(AuthGuard)
+  changePassword(
+    @Req() request: Request,
+    @Body() changePasswordDto: ChangePasswordDto,
+  ) {
+    return this.authService.changePassword(request.user.id, changePasswordDto);
   }
 }

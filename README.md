@@ -5,7 +5,7 @@
 - [x] Use JWT for authentication
 - [x] Login API
 - [x] Forgot password API
-- [] Change password API
+- [x] Change password API
 - [x] CRUD Users
 - [x] CRUD Songs
 - [x] CRUD Banners

@@ -15,6 +15,7 @@ import { MailerService } from 'src/mailer/mailer.service';
 import { ForgotPasswordDto } from './dto/ForgotPassword.dto';
 import { randomBytes } from 'crypto';
 import { ResetPasswordDto } from './dto/ResetPassword.dto';
+import { ChangePasswordDto } from './dto/ChangePassword.dto';
 
 @Injectable()
 export class AuthService {
@@ -134,6 +135,25 @@ export class AuthService {
 
     return {
       message: 'Reset password success',
+    };
+  }
+
+  async changePassword(id: number, changePasswordDto: ChangePasswordDto) {
+    const user = await this.userRepo.findOne({
+      id,
+    });
+    if (!user) {
+      throw new NotFoundException(`User not found`);
+    }
+
+    const newPassword = await hashPassword(changePasswordDto.newPassword);
+    wrap(user).assign({
+      password: newPassword,
+    });
+    await this.em.flush();
+
+    return {
+      message: 'Change password success',
     };
   }
 }
