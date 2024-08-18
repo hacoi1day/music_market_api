@@ -55,6 +55,18 @@ export class User {
   @Exclude()
   password: string;
 
+  @Property({
+    nullable: true,
+  })
+  @Exclude()
+  resetToken?: string;
+
+  @Property({
+    nullable: true,
+  })
+  @Exclude()
+  resetTokenExpiration?: Date;
+
   @Property()
   createdAt = new Date();
 
