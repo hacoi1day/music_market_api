@@ -18,6 +18,10 @@ export default defineConfig({
   migrations: {
     path: './src/migrations',
   },
+  seeder: {
+    path: './src/seeders',
+    glob: '!(*.d).{js,ts}',
+  },
   debug: true,
   extensions: [Migrator],
 });

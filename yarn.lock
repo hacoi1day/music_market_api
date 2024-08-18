@@ -370,6 +370,11 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.57.0.tgz#a5417ae8427873f1dd08b70b3574b453e67b5f7f"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
+"@faker-js/faker@^8.4.1":
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-8.4.1.tgz#5d5e8aee8fce48f5e189bf730ebd1f758f491451"
+  integrity sha512-XQ3cU+Q8Uqmrbf2e0cIC/QN43sTBSC8KF12u29Mb47tWrt2hAgBXSgpZMj4Ao8Uk0iJcU99QsOCaIL8934obCg==
+
 "@humanwhocodes/config-array@^0.11.14":
   version "0.11.14"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.11.14.tgz#d78e481a039f7566ecc9660b4ea7fe6b1fec442b"
@@ -756,6 +761,14 @@
     postgres-array "3.0.2"
     postgres-date "2.1.0"
     postgres-interval "4.0.2"
+
+"@mikro-orm/seeder@^6.3.6":
+  version "6.3.6"
+  resolved "https://registry.yarnpkg.com/@mikro-orm/seeder/-/seeder-6.3.6.tgz#561b50aeded2a23427784a2b1eb4e5c9182728ad"
+  integrity sha512-3npiCGmTd1aOzvTzDl5KIOcgDdsvNfDpTMC4wcFPqMHbxR9jcOUkBdrUw1Qra9dBI7dTH0OpJlxPAz5Cd0USjQ==
+  dependencies:
+    fs-extra "11.2.0"
+    globby "11.1.0"
 
 "@nestjs/cli@^10.0.0":
   version "10.4.4"
