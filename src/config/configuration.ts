@@ -20,4 +20,12 @@ export default () => ({
     secretKey: process.env.MINIO_SECRET_KEY,
     bucket: process.env.MINIO_BUKET,
   },
+
+  mail: {
+    host: process.env.MAIL_HOST,
+    port: parseInt(process.env.MAIL_PORT, 10),
+    secure: process.env.MAIL_SECURE === 'true',
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
 });

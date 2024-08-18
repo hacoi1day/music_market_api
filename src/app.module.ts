@@ -11,6 +11,7 @@ import { SongModule } from './song/song.module';
 import { UserModule } from './user/user.module';
 import { UploadModule } from './upload/upload.module';
 import { MinioModule } from './minio/minio.module';
+import { MailerModule } from './mailer/mailer.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { MinioModule } from './minio/minio.module';
     UserModule,
     UploadModule,
     MinioModule,
+    MailerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
