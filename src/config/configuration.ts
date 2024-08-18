@@ -1,5 +1,6 @@
 export default () => ({
   host: process.env.HOST,
+  endpoints: process.env.ENDPOINTS.split(','),
   env: process.env.ENV,
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
