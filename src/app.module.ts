@@ -9,6 +9,8 @@ import { BannerModule } from './banner/banner.module';
 import configuration from './config/configuration';
 import { SongModule } from './song/song.module';
 import { UserModule } from './user/user.module';
+import { UploadModule } from './upload/upload.module';
+import { MinioModule } from './minio/minio.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { UserModule } from './user/user.module';
     SongModule,
     AuthModule,
     UserModule,
+    UploadModule,
+    MinioModule,
   ],
   controllers: [AppController],
   providers: [AppService],

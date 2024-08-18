@@ -1,4 +1,6 @@
 export default () => ({
+  host: process.env.HOST,
+  env: process.env.ENV,
   port: parseInt(process.env.PORT, 10) || 3000,
   database: {
     host: process.env.DATABASE_HOST,
@@ -9,4 +11,13 @@ export default () => ({
   },
 
   secret: process.env.SECRET,
+
+  minio: {
+    host: process.env.MINIO_HOST,
+    port: parseInt(process.env.MINIO_PORT, 10),
+    useSSL: process.env.USE_SSL === 'true',
+    accessKey: process.env.MINIO_ACCESS_KEY,
+    secretKey: process.env.MINIO_SECRET_KEY,
+    bucket: process.env.MINIO_BUKET,
+  },
 });
