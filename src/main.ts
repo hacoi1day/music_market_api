@@ -13,7 +13,6 @@ async function bootstrap() {
     .setTitle('Song Market API Docs')
     .setDescription('The song market API document')
     .setVersion('1.0')
-    .addTag('songs')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

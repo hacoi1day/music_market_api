@@ -1,26 +1,54 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSongDto } from './dto/create-song.dto';
 import { UpdateSongDto } from './dto/update-song.dto';
+import { InjectRepository } from '@mikro-orm/nestjs';
+import { Song } from 'src/entities/Song.entity';
+import { EntityManager, EntityRepository, wrap } from '@mikro-orm/postgresql';
 
 @Injectable()
 export class SongService {
-  create(createSongDto: CreateSongDto) {
-    return 'This action adds a new song';
+  constructor(
+    @InjectRepository(Song)
+    private readonly songRepository: EntityRepository<Song>,
+    private readonly em: EntityManager,
+  ) {}
+
+  async create(createSongDto: CreateSongDto) {
+    const song = await this.songRepository.create(createSongDto);
+    await this.em.flush();
+    return song;
   }
 
-  findAll() {
-    return `This action returns all song`;
+  async findAll() {
+    return this.songRepository.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} song`;
+  async findOne(id: number) {
+    const song = await this.songRepository.findOne({
+      id,
+    });
+
+    if (!song) {
+      throw new NotFoundException(`Song #${id} not found`);
+    }
+
+    return song;
   }
 
-  update(id: number, updateSongDto: UpdateSongDto) {
-    return `This action updates a #${id} song`;
+  async update(id: number, updateSongDto: UpdateSongDto) {
+    const song = await this.findOne(id);
+    wrap(song).assign(updateSongDto);
+    await this.em.flush();
+
+    return song;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} song`;
+  async remove(id: number) {
+    await this.findOne(id);
+    await this.songRepository.nativeDelete({
+      id,
+    });
+
+    return id;
   }
 }

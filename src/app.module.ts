@@ -8,7 +8,6 @@ import { AuthModule } from './auth/auth.module';
 import { BannerModule } from './banner/banner.module';
 import configuration from './config/configuration';
 import { SongModule } from './song/song.module';
-import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -35,7 +34,6 @@ import { UserModule } from './user/user.module';
         debug: true,
       }),
     }),
-    UserModule,
     BannerModule,
     SongModule,
     AuthModule,
